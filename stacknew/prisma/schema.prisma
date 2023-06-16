@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model trainers {
+  id            BigInt    @id @unique @default(autoincrement())
+  first_name    String
+  last_name     String
+  nickname      String?
+  address       String
+  mobile_no     String?
+  email         String?
+  github        String?
+  linkedin      String?
+  active_status Boolean   @default(true)
+  skill         String?
+  role          String?
+  avail_day     String[]
+  avail_time    DateTime? @db.Time(6)
+  discord_id    String?
+  date_onboard  DateTime? @db.Date
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Categories {
+  id           BigInt         @id @unique @default(autoincrement())
+  title        String?
+  sub_category sub_category[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model sub_category {
+  id          BigInt      @id @default(autoincrement())
+  title       String?
+  category_id BigInt?
+  Categories  Categories? @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("sub category")
+}

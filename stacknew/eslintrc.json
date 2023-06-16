@@ -1,0 +1,9 @@
+{
+    "rules": {
+      "max-len": ["error", {
+        "code": 80,
+        "ignorePattern": "^\\s*class\\s+[A-Z][a-zA-Z0-9]*\\b"
+      }]
+    }
+  }
+  
